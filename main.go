@@ -20,8 +20,9 @@ func main() {
 			log.Fatalf("invalid port number (%s): %v\n", os.Args[1], err)
 		}
 	}
-	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", port),
+	hostPort := fmt.Sprintf(":%d", port)
+	log.Printf("Listening on %s", hostPort)
+	log.Fatal(http.ListenAndServe(hostPort,
 		handlers.LoggingHandler(os.Stderr, http.FileServer(http.Dir("."))),
 	))
 }
-
